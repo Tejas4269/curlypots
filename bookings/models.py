@@ -1,11 +1,10 @@
+import uuid
+
 from django.db import models
+from django.utils import timezone
 
 from customers.models import Customer
 from workshops.models import Slot, Workshop
-
-import uuid
-
-from django.utils import timezone
 
 
 class Booking(models.Model):
@@ -81,13 +80,23 @@ class Booking(models.Model):
         choices=PAYMENT_STATUS_CHOICES,
     )
 
+    payment_expires_at = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
     notes = models.TextField(
         null=True,
         blank=True,
     )
 
-    created_at = models.DateTimeField(default=timezone.now)
-    updated_at = models.DateTimeField(default=timezone.now)
+    created_at = models.DateTimeField(
+        default=timezone.now,
+    )
+
+    updated_at = models.DateTimeField(
+        default=timezone.now,
+    )
 
     class Meta:
         db_table = "bookings"
@@ -129,12 +138,9 @@ class BookingParticipant(models.Model):
         blank=True,
     )
 
-    payment_expires_at = models.DateTimeField(
-        null=True,
-        blank=True,
+    created_at = models.DateTimeField(
+        default=timezone.now,
     )
-
-    created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         db_table = "booking_participants"
@@ -143,3 +149,5 @@ class BookingParticipant(models.Model):
 
     def __str__(self):
         return self.name or "Unnamed participant"
+
+    

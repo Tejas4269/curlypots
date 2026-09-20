@@ -81,9 +81,7 @@ def create_booking(
             f"Only {remaining_seats} seat(s) are available."
         )
 
-    subtotal = (
-        workshop.price * requested_seats
-    )
+    subtotal = workshop.price * requested_seats
 
     discount_amount = Decimal("0.00")
     total_amount = subtotal
@@ -99,9 +97,8 @@ def create_booking(
         total_amount = coupon_result["total"]
         coupon_id = coupon.id
 
-    current_time = timezone.now()
     payment_expires_at = current_time + timedelta(minutes=10)
-    
+
     booking = Booking.objects.create(
         id=uuid4(),
         customer=customer,
@@ -113,6 +110,7 @@ def create_booking(
         total_amount=total_amount,
         coupon_id=coupon_id,
         payment_status="PENDING",
+        payment_expires_at=payment_expires_at,
         created_at=current_time,
         updated_at=current_time,
     )
