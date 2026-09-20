@@ -16,3 +16,38 @@ class Workshop(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Slot(models.Model):
+    id = models.UUIDField(primary_key=True)
+
+    slot_date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    capacity = models.IntegerField()
+    status = models.CharField(max_length=50)
+
+    cancellation_reason = models.TextField(
+        null=True,
+        blank=True,
+    )
+
+    cancelled_at = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
+
+    class Meta:
+        db_table = "slots"
+        managed = False
+        ordering = ["slot_date", "start_time"]
+
+    def __str__(self):
+        return (
+            f"{self.slot_date} "
+            f"{self.start_time} - {self.end_time}"
+        )
