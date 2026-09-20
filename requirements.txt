@@ -1,6 +1,5 @@
-fastapi
-uvicorn[standard]
-jinja2
+#python version -- 3.13.2
+Django
+psycopg[binary]
 python-dotenv
-SQLAlchemy>=2.0,<3.0
-psycopg2-binary==2.9.13
+dj-database-url

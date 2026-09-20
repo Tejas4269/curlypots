@@ -5,11 +5,11 @@ Pottery studio booking and e-commerce application.
 ## Tech Stack
 
 - Python
-- FastAPI
-- SQLAlchemy
+- Django
+- Django ORM
 - PostgreSQL
 - Supabase
-- Jinja2
+- Django Templates
 - Tailwind CSS
 
 ## Author
